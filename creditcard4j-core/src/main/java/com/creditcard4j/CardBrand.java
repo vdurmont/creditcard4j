@@ -1,6 +1,6 @@
 package com.creditcard4j;
 
-public enum CardType {
+public enum CardBrand {
     AMERICAN_EXPRESS("34", "37"),
     DINERS_CLUB("300", "301", "302", "303", "304", "305", "36", "38"),
     DISCOVER("6011", "65"),
@@ -11,10 +11,16 @@ public enum CardType {
 
     private final String[] prefixes;
 
-    private CardType(String... prefixes) {
+    private CardBrand(String... prefixes) {
         this.prefixes = prefixes;
     }
 
+    /**
+     * The list of the known prefixes for a card from this brand.
+     * Since the data is not centralized in a public database, the list can be incomplete.
+     *
+     * @return the prefixes
+     */
     public String[] getPrefixes() {
         return this.prefixes;
     }

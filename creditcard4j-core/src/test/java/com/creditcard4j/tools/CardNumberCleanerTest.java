@@ -2,7 +2,6 @@ package com.creditcard4j.tools;
 
 import com.creditcard4j.CreditCard4J;
 import com.creditcard4j.CreditCard4JTest;
-import com.creditcard4j.tools.CardNumberCleaner;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -36,7 +35,6 @@ public class CardNumberCleanerTest extends CreditCard4JTest {
     @Test
     public void isInputAcceptable_if_spacing_is_allowed_accepts_the_spacing() {
         // GIVEN
-        CreditCard4J.ALLOW_SPACINGS_IN_CARD_NUMBERS = true;
         String number = "12 34-567";
 
         // WHEN
@@ -49,7 +47,7 @@ public class CardNumberCleanerTest extends CreditCard4JTest {
     @Test
     public void isInputAcceptable_if_spacing_is_not_allowed_rejects_the_spacing() {
         // GIVEN
-        CreditCard4J.ALLOW_SPACINGS_IN_CARD_NUMBERS = false;
+        CreditCard4J.ALLOWED_CARD_NUMBERS_SPACING_CHARACTERS = new String[]{};
         String number = "12 34-567";
 
         // WHEN

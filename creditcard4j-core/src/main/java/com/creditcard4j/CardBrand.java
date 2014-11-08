@@ -1,5 +1,10 @@
 package com.creditcard4j;
 
+/**
+ * Enumeration describing the various credit card brands.
+ *
+ * @author Vincent DURMONT [vdurmont@gmail.com]
+ */
 public enum CardBrand {
     AMERICAN_EXPRESS("34", "37"),
     DINERS_CLUB("300", "301", "302", "303", "304", "305", "36", "38"),

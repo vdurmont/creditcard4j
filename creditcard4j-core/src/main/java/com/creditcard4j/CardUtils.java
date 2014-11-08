@@ -4,6 +4,11 @@ import com.creditcard4j.tools.CardNumberCleaner;
 
 import static com.creditcard4j.tools.Preconditions.checkNotNull;
 
+/**
+ * Utility class that provides methods to manage credit cards.
+ *
+ * @author Vincent DURMONT [vdurmont@gmail.com]
+ */
 public class CardUtils {
     private static final int MAX_CARD_NUMBER_LENGTH = 7;
 

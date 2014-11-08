@@ -38,4 +38,39 @@ public class Preconditions {
         }
         return object;
     }
+
+    /**
+     * Asserts that a string is longer than a requested length.
+     *
+     * @param message   the error message if the string is too short
+     * @param string    the string to study
+     * @param minLength the minimum lenght requested
+     *
+     * @return the {@code string} if it was long enough.
+     * @throws java.lang.IllegalArgumentException if {@code string} is null or too short
+     */
+    public static String checkLongerThan(String message, String string, int minLength) {
+        checkNotNull(message, string);
+        if (string.length() < minLength) {
+            throw new IllegalArgumentException(message);
+        }
+        return string;
+    }
+
+    /**
+     * Asserts that a string only contains digits.
+     *
+     * @param message the error message if the string has not only digits
+     * @param string  the string to study
+     *
+     * @return the {@code string} if it was long enough.
+     * @throws java.lang.IllegalArgumentException if {@code string} is null or too short
+     */
+    public static String checkIsDigitsOnly(String message, String string) {
+        checkNotNull(message, string);
+        if (!string.matches("\\d*")) {
+            throw new IllegalArgumentException(message);
+        }
+        return string;
+    }
 }

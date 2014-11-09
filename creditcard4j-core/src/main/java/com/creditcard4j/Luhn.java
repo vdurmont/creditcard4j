@@ -17,64 +17,24 @@ public class Luhn {
      * @return true if the number is valid
      */
     public static boolean isValid(String number) {
-        // TODO optimize this method!
         checkLongerThan("The number must have at least 2 characters.", number, 2);
         checkIsDigitsOnly("Only digits are allowed", number);
         int length = number.length();
-        int checkDigit = Integer.valueOf(number.substring(length - 1, length));
+
+        // We will study all the digits but the last
         char[] chars = number.substring(0, length - 1).toCharArray();
-        int[] original = charsToInts(chars);
-        int[] doubled = doubleEveryOtherDigit(original);
-        int[] simplified = simplify(doubled);
-        int sum = sum(simplified);
-        int finalNumber = sum + checkDigit;
-        return finalNumber % 10 == 0;
-    }
-
-    private static int[] charsToInts(char[] chars) {
-        int len = chars.length;
-        int[] ints = new int[len];
-        for (int i = 0; i < len; i++) {
-            ints[i] = Integer.valueOf(String.valueOf(chars[len - i - 1]));
+        // Init the sum with the check digit
+        int sum = Character.getNumericValue(number.charAt(length - 1));
+        for (int i = 0; i < length - 1; i++) {
+            // Get the digit
+            int value = Character.getNumericValue(chars[length - i - 2]);
+            // For each other digit multiply the value by 2
+            value *= (i % 2 == 1) ? 1 : 2;
+            // If the result has 2 digits, we replace it by the sum of the 2 digits
+            // Incrementing the sum by the result.
+            sum += value < 10 ? value : value - 9;
         }
-        return ints;
-    }
-
-    private static int[] doubleEveryOtherDigit(int[] original) {
-        int len = original.length;
-        int[] doubled = new int[len];
-        for (int i = 0; i < len; i++) {
-            if (i % 2 == 1) {
-                doubled[i] = original[i];
-            } else {
-                doubled[i] = original[i] * 2;
-            }
-        }
-        return doubled;
-    }
-
-    private static int[] simplify(int[] doubled) {
-        int len = doubled.length;
-        int[] simplified = new int[len];
-        for (int i = 0; i < len; i++) {
-            simplified[i] = simplify(doubled[i]);
-        }
-        return simplified;
-    }
-
-    private static int simplify(int original) {
-        if (original < 10) {
-            return original;
-        } else {
-            return original - 9;
-        }
-    }
-
-    private static int sum(int[] simplified) {
-        int sum = 0;
-        for (int num : simplified) {
-            sum += num;
-        }
-        return sum;
+        // If the sum % 10 == 0, the number is valid
+        return sum % 10 == 0;
     }
 }

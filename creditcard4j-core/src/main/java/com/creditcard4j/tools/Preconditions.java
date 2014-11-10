@@ -1,5 +1,7 @@
 package com.creditcard4j.tools;
 
+import com.creditcard4j.exception.CreditCard4JException;
+
 /**
  * Provides tools to apply preconditions on method inputs.
  *
@@ -47,12 +49,13 @@ public class Preconditions {
      * @param minLength the minimum lenght requested
      *
      * @return the {@code string} if it was long enough.
-     * @throws java.lang.IllegalArgumentException if {@code string} is null or too short
+     * @throws java.lang.IllegalArgumentException               if {@code string} is null
+     * @throws com.creditcard4j.exception.CreditCard4JException if {@code string} is too short
      */
     public static String checkLongerThan(String message, String string, int minLength) {
         checkNotNull(message, string);
         if (string.length() < minLength) {
-            throw new IllegalArgumentException(message);
+            throw new CreditCard4JException(message);
         }
         return string;
     }
@@ -64,7 +67,7 @@ public class Preconditions {
      * @param string  the string to study
      *
      * @return the {@code string} if it was long enough.
-     * @throws java.lang.IllegalArgumentException if {@code string} is null or too short
+     * @throws java.lang.IllegalArgumentException if {@code string} is null or contains other characters than digits
      */
     public static String checkIsDigitsOnly(String message, String string) {
         checkNotNull(message, string);

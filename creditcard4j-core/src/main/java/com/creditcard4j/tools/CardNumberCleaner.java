@@ -16,11 +16,12 @@ public class CardNumberCleaner {
      * @param cardNumber the card number
      *
      * @return the cleaned card number
+     * @throws java.lang.IllegalArgumentException if the number if malformed
      */
     public static String clean(String cardNumber) {
         checkNotNull("Invalid card number", cardNumber);
         if (!isInputAcceptable(cardNumber)) {
-            throw new IllegalArgumentException("Invalid card number");
+            throw new IllegalArgumentException("Invalid card number (unauthorized characters)");
         }
         return cardNumber.replaceAll("[^\\d]", "");
     }

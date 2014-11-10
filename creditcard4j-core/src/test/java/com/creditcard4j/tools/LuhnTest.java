@@ -1,11 +1,13 @@
-package com.creditcard4j;
+package com.creditcard4j.tools;
 
+import com.creditcard4j.AbstractTest;
+import com.creditcard4j.exception.CreditCard4JException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class LuhnTest extends CreditCard4JTest {
+public class LuhnTest extends AbstractTest {
     @Test
     public void isValid_with_unprocessable_number_fails() {
         // GIVEN
@@ -24,7 +26,7 @@ public class LuhnTest extends CreditCard4JTest {
         String number = "1";
 
         // THEN
-        this.expectedEx.expect(IllegalArgumentException.class);
+        this.expectedEx.expect(CreditCard4JException.class);
 
         // WHEN
         Luhn.isValid(number);
@@ -45,9 +47,7 @@ public class LuhnTest extends CreditCard4JTest {
     @Test
     public void isValid_with_valid_number_returns_true() {
         // GIVEN
-        // TODO
-//        String number = "4242424242424242";
-        String number = "4000056655665556";
+        String number = "4242424242424242";
 
         // WHEN
         boolean valid = Luhn.isValid(number);

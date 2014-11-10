@@ -1,11 +1,13 @@
 package com.creditcard4j.tools;
 
-import com.creditcard4j.CreditCard4JTest;
+import com.creditcard4j.AbstractTest;
+import com.creditcard4j.CreditCard4J;
+import com.creditcard4j.exception.CreditCard4JException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class PreconditionsTest extends CreditCard4JTest {
+public class PreconditionsTest extends AbstractTest {
     @Test
     public void checkNotEmpty_with_a_null_string_fails() {
         // GIVEN
@@ -87,7 +89,7 @@ public class PreconditionsTest extends CreditCard4JTest {
         String message = "my message";
 
         // THEN
-        this.expectedEx.expect(IllegalArgumentException.class);
+        this.expectedEx.expect(CreditCard4JException.class);
 
         // WHEN
         Preconditions.checkLongerThan(message, "a", 2);

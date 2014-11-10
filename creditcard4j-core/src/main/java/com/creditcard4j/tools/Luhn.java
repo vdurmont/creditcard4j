@@ -1,4 +1,6 @@
-package com.creditcard4j;
+package com.creditcard4j.tools;
+
+import com.creditcard4j.exception.CreditCard4JException;
 
 import static com.creditcard4j.tools.Preconditions.checkIsDigitsOnly;
 import static com.creditcard4j.tools.Preconditions.checkLongerThan;
@@ -15,6 +17,8 @@ public class Luhn {
      * @param number the number to study
      *
      * @return true if the number is valid
+     * @throws java.lang.IllegalArgumentException               if the card number is malformed
+     * @throws com.creditcard4j.exception.CreditCard4JException is the card number is less than 2 digits long
      */
     public static boolean isValid(String number) {
         checkLongerThan("The number must have at least 2 characters.", number, 2);
@@ -36,5 +40,21 @@ public class Luhn {
         }
         // If the sum % 10 == 0, the number is valid
         return sum % 10 == 0;
+    }
+
+    /**
+     * Checks the validity of the card number against the Luhn algorithm.
+     *
+     * @param number the card number
+     *
+     * @return the validated number
+     * @throws java.lang.IllegalArgumentException               if the number is malformed
+     * @throws com.creditcard4j.exception.CreditCard4JException if the number is invalid
+     */
+    public static String checkValidity(String number) {
+        if (!isValid(number)) {
+            throw new CreditCard4JException("Invalid card number (Luhn Algorithm failed)");
+        }
+        return number;
     }
 }
